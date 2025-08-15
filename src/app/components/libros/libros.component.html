@@ -1,0 +1,48 @@
+<section class="books-table-section">
+    <div class="table-header">
+        <h2>LISTA DE LIBROS</h2>
+        <button class="add-button" [routerLink]="['/libros/nuevo']">
+            <i class="fas fa-plus"></i> Añadir Libro
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="books-table">
+            <thead>
+                <tr>
+                    <th>TÍTULO</th>
+                    <th>AUTOR</th>
+                    <th>AÑO</th>
+                    <th>PRECIO</th>
+                    <th>DESCUENTO</th>
+                    <th>PRECIO FINAL</th>
+                    <th>ACCIÓN</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (libro of libros; track libro.id) {
+                <tr>
+                    <td>{{ libro.titulo | uppercase }}</td>
+                    <td>{{ libro.autor }}</td>
+                    <td>{{ libro.anio | date:'yyyy' }}</td>
+                    <td>{{ libro.precio | currency }}</td>
+                    <td>
+                        {{ libro.precio < 20 ? '5%' : (libro.precio <=50 ? '10%' : '15%' ) }} </td>
+                    <td>
+                        {{ libro.precio | descuento | currency }}
+                    </td>
+                    <td>
+                        <button class="delete-button" (click)="eliminarLibro(libro.id)">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="7" class="no-books">No hay libros registrados</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

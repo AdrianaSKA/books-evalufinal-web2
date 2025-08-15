@@ -1,0 +1,31 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="/" class="navbar-logo">
+            <span class="logo-icon"><i class="fas fa-book-open"></i></span>
+            <span class="logo-text">Libreria Books</span>
+        </a>
+
+        <div class="navbar-links">
+            <a routerLink="/" class="nav-link active">Inicio</a>
+            @if (authServicio.sesionIniciada()) {
+            <a routerLink="/libros" class="nav-link">Libros</a>
+            <a routerLink="/libros/nuevo" class="nav-link">Registrar Libros</a>
+            }
+        </div>
+
+        <div class="navbar-actions">
+            @if (!authServicio.sesionIniciada()) {
+            <a routerLink="registro" class="nav-link">Registro</a>
+            <a routerLink="login" class="nav-link outline">Iniciar Sesión</a>
+            }
+            @if (authServicio.sesionIniciada()) {
+
+
+            <button class="logout-button" (click)="logout()">
+                <i class="fas fa-sign-out-alt logout-icon"></i>
+                Cerrar Sesión
+            </button>
+            }
+        </div>
+    </div>
+</nav>
