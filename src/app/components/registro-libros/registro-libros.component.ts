@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './registro-libros.component.css'
 })
 export class RegistroLibrosComponent {
+    enviado: boolean = false;
 
   libroForm: FormGroup;
 
@@ -36,6 +37,8 @@ export class RegistroLibrosComponent {
 
   registrar() {
     if (this.libroForm.valid) {
+      this.enviado = true;
+
       const nuevoLibro = this.libroForm.value;
 
       this.librosService.crearLibro(nuevoLibro).subscribe({
@@ -53,4 +56,10 @@ export class RegistroLibrosComponent {
       this.libroForm.markAllAsTouched();
     }
   }
+
+      campoVacios = () => {
+    return !this.enviado && Object.values(this.libroForm).some(valor => valor.
+      trim?.() !== '');
+  }
+
 }
